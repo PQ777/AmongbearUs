@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    public GameObject joyStick;
     public float speed;
+
+    public bool isJoyStick;
 
     private void Start()
     {
@@ -18,6 +21,15 @@ public class PlayerCtrl : MonoBehaviour
     // 캐릭터 움직임 관리
     void Move()
     {
+        if (isJoyStick)
+        {
+            joyStick.SetActive(true);
+        }
+
+        else
+        {
+            joyStick.SetActive(false);
+        }
         // 클릭했는지 판단
         if (Input.GetMouseButton(0))
         {
