@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 327013583}
   - component: {fileID: 327013582}
   - component: {fileID: 327013585}
+  - component: {fileID: 327013586}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -555,7 +556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joyStick: {fileID: 1440172691}
   speed: 3
-  isJoyStick: 0
+  isJoyStick: 1
 --- !u!212 &327013583
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -638,6 +639,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stick: {fileID: 166755058}
   backGround: {fileID: 1440172692}
+--- !u!95 &327013586
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327013581}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0ad7a81e9471b644ea660a6ff03993cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

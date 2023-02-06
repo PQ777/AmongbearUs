@@ -5,12 +5,16 @@ using UnityEngine;
 public class PlayerCtrl : MonoBehaviour
 {
     public GameObject joyStick;
+
+    Animator anim;
+
     public float speed;
 
     public bool isJoyStick;
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         Camera.main.transform.parent = transform;
         Camera.main.transform.localPosition = new Vector3(0, 0, -10);
     }
@@ -36,6 +40,25 @@ public class PlayerCtrl : MonoBehaviour
             Vector3 dir = (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f)).normalized;
 
             transform.position += dir * speed * Time.deltaTime;
+
+            anim.SetBool("isWalk", true);
+
+            // 왼쪽으로 이동
+            if(dir.x<0)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+
+            // 오른쪽으로 이동
+            else
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+        // 클릭하지 않는다면
+        else
+        {
+            anim.SetBool("isWalk", false);
         }
     }
 }
