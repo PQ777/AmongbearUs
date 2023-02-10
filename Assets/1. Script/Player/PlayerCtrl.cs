@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    public GameObject joyStick;
-
+    public GameObject joyStick, mainView, missionView;
+    public Settings settings_script;
     Animator anim;
 
     public float speed;
 
-    public bool isJoyStick;
+   public bool isCantMove;
+    
 
     private void Start()
     {
@@ -20,12 +22,21 @@ public class PlayerCtrl : MonoBehaviour
     }
     private void Update()
     {
-        Move();
+        if(isCantMove)
+        {
+            joyStick.SetActive(false);
+        }
+
+        else
+        {
+            Move();
+        }
+        
     }
     // 캐릭터 움직임 관리
     void Move()
     {
-        if (isJoyStick)
+        if (settings_script.isJoyStick)
         {
             joyStick.SetActive(true);
         }
@@ -37,28 +48,48 @@ public class PlayerCtrl : MonoBehaviour
         // 클릭했는지 판단
         if (Input.GetMouseButton(0))
         {
-            Vector3 dir = (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f)).normalized;
-
-            transform.position += dir * speed * Time.deltaTime;
-
-            anim.SetBool("isWalk", true);
-
-            // 왼쪽으로 이동
-            if(dir.x<0)
+            if(!EventSystem.current.IsPointerOverGameObject())
             {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
+                Vector3 dir = (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f)).normalized;
 
-            // 오른쪽으로 이동
-            else
-            {
-                transform.localScale = new Vector3(1, 1, 1);
+                transform.position += dir * speed * Time.deltaTime;
+
+                anim.SetBool("isWalk", true);
+
+                // 왼쪽으로 이동
+                if (dir.x < 0)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
+
+                // 오른쪽으로 이동
+                else
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
             }
+    
         }
         // 클릭하지 않는다면
         else
         {
             anim.SetBool("isWalk", false);
+        }
+    }
+
+    // 캐릭터 삭제
+    public void DestroyPlayer()
+    {
+        Camera.main.transform.parent = null;
+
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Mission")
+        {
+            print("미션 감지");
         }
     }
 }

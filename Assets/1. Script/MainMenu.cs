@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject missionView;
     // 게임 종료 버튼 누르면 호출
     public void ClickQuit()
     {
@@ -15,5 +16,16 @@ public class MainMenu : MonoBehaviour
 #else
 Application.Quit();
 #endif
+    }
+
+    // 미션 버튼 누르면 호출
+    public void ClickMission()
+    {
+        gameObject.SetActive(false);
+        missionView.SetActive(true);
+
+        GameObject player = Instantiate(Resources.Load("Character"), new Vector3(0,-2,0), Quaternion.identity) as GameObject;
+        player.GetComponent<PlayerCtrl>().mainView = gameObject;
+        player.GetComponent<PlayerCtrl>().missionView = missionView;
     }
 }
