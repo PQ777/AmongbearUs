@@ -50,7 +50,7 @@ public class Mission1 : MonoBehaviour
         Image img = EventSystem.current.currentSelectedGameObject.GetComponent<Image>();
 
         // ÇÏ¾á»ö
-        if(img.color == Color.white)
+        if(img.color == Color.white)   
         {
             // »¡°£»öÀ¸·Î
             img.color = red;
